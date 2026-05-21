@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "actuallyadditions:display_stand"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MPM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aatiers:iron_display_stand"
+  }
+}

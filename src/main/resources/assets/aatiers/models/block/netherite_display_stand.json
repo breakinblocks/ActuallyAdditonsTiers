@@ -1,0 +1,9 @@
+{
+  "parent": "actuallyadditions:block/display_stand",
+  "textures": {
+    "base": "aatiers:block/netherite_base_texture",
+    "side": "aatiers:block/netherite_display_stand_side",
+    "particle": "aatiers:block/netherite_display_stand_top",
+    "top": "aatiers:block/netherite_display_stand_top"
+  }
+}

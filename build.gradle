@@ -1,0 +1,108 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.140'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+def mcMinorAndPatch = getMinorAndPatchFromMc()
+
+version = "${mcMinorAndPatch}.${mod_version}"
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = "${mcMinorAndPatch}.${neo_version}"
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    accessTransformers = files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+            jvmArguments.add("-Dmixin.debug.export=true")
+        }
+
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+repositories {
+    maven {
+        url = "https://api.modrinth.com/maven"
+        content { includeGroup "maven.modrinth" }
+    }
+}
+
+dependencies {
+    compileOnly "maven.modrinth:actually-additions:${actually_additions_version}"
+    localRuntime "maven.modrinth:actually-additions:${actually_additions_version}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+        version: version,
+        mod_id: mod_id,
+        mod_name: mod_name,
+        pack_format: pack_format,
+        loader_version_range: loader_version_range,
+        mod_loader_range: mod_loader_range.replace("\${mc_base}", mcMinorAndPatch),
+        mod_url: mod_url,
+        mod_description: mod_description
+    ]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+def getMinorAndPatchFromMc() {
+    String mcVersion = project.minecraft_version
+    String[] split = mcVersion.split("\\.")
+    return split[1] + "." + (split[2] ?: "0")
+}

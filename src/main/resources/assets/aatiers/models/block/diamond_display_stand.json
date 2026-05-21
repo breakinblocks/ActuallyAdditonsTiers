@@ -1,0 +1,9 @@
+{
+  "parent": "actuallyadditions:block/display_stand",
+  "textures": {
+    "base": "aatiers:block/diamond_base_texture",
+    "side": "aatiers:block/diamond_display_stand_side",
+    "particle": "aatiers:block/diamond_display_stand_top",
+    "top": "aatiers:block/diamond_display_stand_top"
+  }
+}

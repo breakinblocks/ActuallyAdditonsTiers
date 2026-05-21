@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "aatiers:gold_display_stand"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MPM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aatiers:diamond_display_stand"
+  }
+}

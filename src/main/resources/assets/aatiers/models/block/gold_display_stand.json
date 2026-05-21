@@ -1,0 +1,9 @@
+{
+  "parent": "actuallyadditions:block/display_stand",
+  "textures": {
+    "base": "aatiers:block/gold_base_texture",
+    "side": "aatiers:block/gold_display_stand_side",
+    "particle": "aatiers:block/gold_display_stand_top",
+    "top": "aatiers:block/gold_display_stand_top"
+  }
+}

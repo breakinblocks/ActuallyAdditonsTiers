@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.saereth.aatiers.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "aatiers.refmap.json",
+  "mixins": [
+    "TileEntityDisplayStandMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
