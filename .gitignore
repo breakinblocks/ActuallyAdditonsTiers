@@ -21,3 +21,9 @@ Thumbs.db
 __pycache__/
 *.pyc
 libs/
+
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE.md
+
