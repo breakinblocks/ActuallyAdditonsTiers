@@ -27,3 +27,6 @@ libs/
 !CHANGELOG.md
 !LICENSE.md
 
+*.ps1
+*.py
+
