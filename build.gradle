@@ -1,3 +1,5 @@
+import org.slf4j.event.Level
+
 plugins {
     id 'java-library'
     id 'idea'
@@ -32,7 +34,7 @@ neoForge {
     runs {
         configureEach {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
-            logLevel = org.slf4j.event.Level.DEBUG
+            logLevel = Level.DEBUG
             jvmArguments.add("-Dmixin.debug.export=true")
         }
 
