@@ -4,6 +4,7 @@ plugins {
     id 'java-library'
     id 'idea'
     id 'net.neoforged.moddev' version '2.0.140'
+    id 'me.modmuss50.mod-publish-plugin' version '1.1.0'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -97,6 +98,25 @@ tasks.withType(ProcessResources).configureEach {
 
     filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    def changelogFile = file("metadata/changelogs/${mod_version}.md")
+    changelog = changelogFile.exists() ? changelogFile.text : "Release ${version}"
+    type = STABLE
+    modLoaders.add("neoforge")
+
+    curseforge {
+        projectId = "1549640"
+        projectSlug = "actually-additions-tiers"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.add(minecraft_version)
+        clientRequired = true
+        serverRequired = true
+        requires("actually-additions")
+        optional("jei")
     }
 }
 

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "aatiers:iron_display_stand",
+    "aatiers:gold_display_stand",
+    "aatiers:diamond_display_stand",
+    "aatiers:netherite_display_stand"
+  ]
+}
